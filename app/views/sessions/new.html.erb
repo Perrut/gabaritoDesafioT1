@@ -1,0 +1,22 @@
+<h1>Log in</h1>
+
+<!-- A variavel notice pertence a uma hash especial do sistema, chamada
+ flash hash, e eh utilizada para exibir avisos sobre o retorno de
+ alguma acao realizada por algum controller -->
+<p id="notice" ><%= notice %></p>
+
+<%= form_for(:session, url: login_path) do |form| %>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Login" %>
+  </div>
+<% end %>

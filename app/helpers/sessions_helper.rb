@@ -29,4 +29,12 @@ module SessionsHelper
             format.html { redirect_to login_path, alert: "faça login" }
         end if !logged_in?
     end
+    
+    # Ira redirecionar para a pagina do usuario logado (current_user),
+    # caso ele ja esteja logado
+    def logged_user
+        respond_to do |format|
+            format.html { redirect_to current_user, alert: "já está logado!" }
+        end if logged_in?
+    end
 end

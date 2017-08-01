@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+    # Ira executar o metodo logged_user em SessionsHelper, para impedir uma
+    # tentativa de login de um usuario ja logado
+    before_action :logged_user, only: [:new, :create]
     
     # Responsavel pela pagina de login
     def new

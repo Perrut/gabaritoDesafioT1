@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-  # Ira executar antes de qualquer acao o metodo non_logged_user de
-  # SessionsHelper
-  before_action :non_logged_user
+  # Ira impedir que um usuario ja logado crie outros usuarios
+  before_action :logged_user, only: [:new, :create]
+  # Ira executar antes de qualquer acao exceto :new e :create o metodo
+  # non_logged_user de SessionsHelper, para prevenir que um usuario
+  # nao logado acesse as outras paginas de user
+  before_action :non_logged_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -31,7 +34,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        # Agora eu devo redirecionar para a pagina de login
+        format.html { redirect_to login_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
